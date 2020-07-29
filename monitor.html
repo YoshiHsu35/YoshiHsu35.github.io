@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITRI DP</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Fredoka+One&display=swap" rel="stylesheet">
+
+</head>
+<style>
+#legend {
+  position: absolute;
+  /* font-family: Arial, sans-serif; */
+  background: rgb(187, 187, 187);
+  font-size: 5px;
+  padding: 5px;
+  left: 5px;
+  bottom: 5px;
+  border: 1px solid #000;
+}
+
+nav * {
+  /* font-family: 'Anton', sans-serif; */
+  font-family: 'Fredoka One', cursive;
+  /* font-weight: 400; */
+}
+
+body {
+  background-color: #fff7f8;
+}
+.navbar-custom {
+  background-color: #c2f9ff;
+}
+#gmap {
+  width: 100%;
+  height: 700px;
+  box-sizing: border-box;
+}
+#logout {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+</style>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+    <a class="navbar-brand" href="dpSet.html">
+      <img src="assets/horus-eye.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      HORUS DP
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/dpSet.html">DP Config<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/monitor.html">Monitor</a>
+        <a class="nav-item nav-link" href="/bsList.html">eNB List</a>
+        <a class="nav-item nav-link disabled" href="#">Debug</a>
+      </div>
+    </div>
+    <a id="logout" href="index.html">logout</a>
+  </nav>
+  <div id="app">
+    <div class="row my-5 mx-3">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-info" style="padding: 1px; margin: 0px; font-family: 'Fredoka One', cursive;">
+            google map
+          </div>
+          <div class="card-body" style="padding: 0px">
+            <div id="gmap" class="gmap_scope"></div>
+            <div id="legend">
+              <!-- <h4>Legend</h4> -->
+              <div v-for="item in icons" :key="item.color" class="my-1">
+                <img :src="item.url" alt="" style="width: 15px; height: 23px;">{{item.title}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header bg-info" style="padding: 1px; margin: 0px; font-family: 'Fredoka One', cursive;">
+            xxx-xxxxxxxxxx eNB Log
+          </div>
+          <div class="card-body" style="padding: 0px">
+            <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" style="height: 700px;"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+      </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABQCQRG9WGQ4jlczoxXovdSp6j9eEwA5Q">
+  </script>
+  <script src="/monitor.js"></script>
+</body>
+</html>

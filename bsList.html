@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITRI DP</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css' />
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Fredoka+One&display=swap" rel="stylesheet">
+
+</head>
+<style>
+nav * {
+  /* font-family: 'Anton', sans-serif; */
+  font-family: 'Fredoka One', cursive;
+  /* font-weight: 400; */
+}
+.container-custom-width {
+  max-width: 1500px;
+}
+#logout {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+body {
+  background-color: #fff7f8;
+}
+.navbar-custom {
+  background-color: #c2f9ff;
+}
+
+.inputText {
+  margin: 5px;
+}
+
+.inputText input{
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+label {
+  font-family: 'Fredoka One', cursive;
+}
+
+input {
+  float: right;
+  clear: both;
+}
+
+.table th {
+  padding: 5px;
+}
+
+</style>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+    <a class="navbar-brand" href="dpSet.html">
+      <img src="assets/horus-eye.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      HORUS DP
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="/dpSet.html">DP Config<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/monitor.html">Monitor</a>
+        <a class="nav-item nav-link" href="/bsList.html">eNB List</a>
+        <a class="nav-item nav-link disabled" href="#">Debug</a>
+      </div>
+    </div>
+    <a id="logout" href="index.html">logout</a>
+  </nav>
+  <div id="app" class="container-fluid container-custom-width my-3">
+  <enbmodal></enbmodal>
+    <div>
+      <button class="btn btn-primary" @click="openModal" data-toggle="modal" data-target=".bd-example-modal-lg">新增基站</button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped my-3">
+        <thead class="thead-dark">
+          <tr>
+            <th v-for="item in listhead" :key="item">{{item}}</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in enbs" :key="item.ip">
+            <th>{{item.ip}}</th>
+            <th style="width: 240px;">{{item.cbsdsn}}</th>
+            <th>{{item.status}}</th>
+            <th>{{item.RF_status}}</th>
+            <th>{{item.txpower}}/{{item.maxeirp}}</th>
+            <th>{{item.highfreq}}/{{item.lowfreq}}</th>
+            <th>{{item.bandwidth}}</th>
+            <th style="width: 100px;">{{item.category}}</th>
+            <th style="width: 100px;"><a href="">詳細參數</a></th>
+            <th style="width: 100px;">
+              <button class="btn btn-outline-info btn-sm" style="width:35px;height:35px;" @click="openModal"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-outline-danger btn-sm" style="width:35px;height:35px;"><i class="fas fa-trash-alt"></i></button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+      </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/bsList.js"></script>
+  <script src="/enbModal.js"></script>
+</body>
+</html>
