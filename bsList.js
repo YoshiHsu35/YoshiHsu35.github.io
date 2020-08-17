@@ -1,6 +1,7 @@
 new Vue({
   el: '#app',
   data: {
+    editModal: true,
     user: {
       uid: '',
       token: ''
@@ -33,6 +34,19 @@ new Vue({
     
   },
   methods: {
+    enableCBRS (cbsd, turn) {
+      console.log(cbsd);
+      const api = 'http://10.101.129.48:5888/enb/enableCBRS';
+      const body = {
+        param: turn,
+        cbsdsn: cbsd
+      }
+      axios.post(api, body).then((res) => {
+        console.log(res);
+      }).catch(e => {
+        console.log(e);
+      })
+    },
     getEnbDetail (cbsd) {
       return new Promise((resolve, reject) => {
         const api = `http://10.101.129.48:5888/enb/?cbsd=${cbsd}`;
@@ -75,6 +89,10 @@ new Vue({
       const api = 'http://10.101.129.48:5888/enb/?cbsd=';
       axios.get(api).then((res) => {
         this.enbs = res.data;
+        // this.enbs.forEach(el => {
+        //   el.switch = false;
+        //   console.log(el);
+        // });
       }).catch(e => {
         console.log(e);
       })
@@ -100,9 +118,11 @@ new Vue({
         const vm = this;
         vm.tempDetailEnb.sn = cbsd;
         this.getEnbDetail(cbsd).then(res => {
-          console.log('this: ' + JSON.stringify(this.tempDetailEnb.detail));
-          console.log('vm: ' + JSON.stringify(vm.tempDetailEnb.detail));
+          // console.log('this: ' + JSON.stringify(this.tempDetailEnb.detail));
+          // console.log('vm: ' + JSON.stringify(vm.tempDetailEnb.detail));
           // vm.isLoadIn = true;
+          // this.editModal = true;
+          this.$refs.edit1.resetData();
           $('#enbmodal').modal('show');
           console.log('Modal Opened');
         }).catch(err => {
@@ -110,9 +130,22 @@ new Vue({
         })
       } else if (mode == 'new'){
         // const vm = this;
+        this.$refs.new1.resetData();
         $('#newmodal').modal('show');
       } else {
-        $('#detailenbmodal').modal('show');
+        const vm = this;
+        vm.tempDetailEnb.sn = cbsd;
+        this.getEnbDetail(cbsd).then(res => {
+          // console.log('this: ' + JSON.stringify(this.tempDetailEnb.detail));
+          console.log('vm: ' + JSON.stringify(vm.tempDetailEnb.detail));
+          // vm.isLoadIn = true;
+          this.$refs.detail1.resetData();
+          $('#detailenbmodal').modal('show');
+          console.log('Modal Opened');
+        }).catch(err => {
+          console.log(err);
+        })
+        
       }
     }
   }

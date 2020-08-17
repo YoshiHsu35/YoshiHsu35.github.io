@@ -87,6 +87,7 @@ new Vue({
       this.enbs.forEach(el => {
         cenlat += el.latitude;
         cenlng += el.longitude;
+        console.log(`lat: ${el.latitude}, lng: ${el.longitude}`);
       })
       cenlat = cenlat/this.enbs.length;
       cenlng = cenlng/this.enbs.length;

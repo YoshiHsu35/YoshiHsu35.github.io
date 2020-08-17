@@ -13,139 +13,68 @@ Vue.component('detail-enbmodal',{
         </div>
         <div class="modal-body" style="padding-bottom: 5px;">
           <div class="row">
-            <div class="col mx-0" style="padding-right: 5px">
-              <table class="table table-striped table-border" style="width: 100%">
+            <div class="col mx-0" style="padding-right: 1px">
+              <table class="table table-striped table-bordered" style="width: 100%">
                 <thead class="thead-dark table-custom">
                   <tr>
                     <th>INFO (Requierd)</th>
                   </tr>
                 </thead>
-                <div class="inputText">
-                    <label for="cbsdsn">CBSD S/N</label>
-                    <input type="text" :value="cbsd"/>
-                </div>
-                <div class="inputText">
-                    <label for="fccid">FCCID</label>
-                    <input type="text" :value="detail.fccId"/>
-                </div>
-                <div class="inputText">
-                    <label for="userid">userID</label>
-                    <input type="text" :value="detail.userId"/>
-                </div>
+                <tbody>
+                  <tr v-for="item in info" :key="item.name">
+                    <td style="display: flex; justify-content: space-between; height: 40px; padding: 3px"><label style="font-weight: normal">{{item.name}}:</label>{{item.value}}</td>
+                  </tr>
+                </tbody>
                 <thead class="thead-dark">
                   <tr>
                     <th>GPS (Requierd)</th>
                   </tr>
                 </thead>
-                <div class="inputText">
-                    <label for="lng">Longitude</label>
-                    <input type="text" :value="detail.lng"/>
-                </div>
-                <div class="inputText">
-                    <label for="lat">Latitude</label>
-                    <input type="text" :value="detail.lat"/>
-                </div>
+                <tbody>
+                  <tr v-for="item in gps" :key="item.name">
+                    <td style="display: flex; justify-content: space-between; height: 40px; padding: 3px"><label style="font-weight: normal;">{{item.name}}:</label>{{item.value}}</td>
+                  </tr>
+                </tbody>
                 <thead class="thead-dark">
                   <tr>
                     <th>CPI INFO (Requierd)</th>
                   </tr>
                 </thead>
-                <div class="inputText">
-                    <label for="cpiid">CPI ID</label>
-                    <input type="text" :value="detail.cpiId"/>
-                </div>
-                <div class="inputText">
-                    <label for="cpiname">CPI Name</label>
-                    <input type="text" :value="detail.cpiName"/>
-                </div>
-                <div class="inputText">
-                    <label for="ict">InstallCert. Time</label>
-                    <input type="text" :value="detail.installCertificateTime"/>
-                </div>
-                <div class="inputText">
-                    <label for="ph">ProtectedHeader</label>
-                    <input type="text" :value="detail.protectedHeader"/>
-                </div>
-                <div class="inputText">
-                    <label for="ecsd">EncodedCpiSignData</label>
-                    <input type="text" :value="detail.encodedCpiSignData"/>
-                </div>
-                <div class="inputText">
-                    <label for="ds">DigitalSignature</label>
-                    <input type="text" :value="detail.digitalSignature"/>
-                </div>
+                <tbody>
+                  <tr v-for="item in cpiinfo" :key="item.name">
+                    <td style="display: flex; justify-content: space-between; height: 40px; padding: 3px"><label style="font-weight: normal;">{{item.name}}:</label>{{item.value}}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
-            <div class="col mx-0" style="padding-left: 5px">
-              <table class="table table-striped table-border" style="width: 100%">
+            <div class="col mx-0" style="padding-left: 0px">
+              <table class="table table-striped table-bordered" style="width: 100%;">
                 <thead class="thead-dark">
                   <tr>
                     <th>CBSD INFO</th>
                   </tr>
                 </thead>
-                <div class="inputText">
-                    <label for="callsign">callSign</label>
-                    <input type="text" :value="detail.callSign"/>
-                </div>
-                <div class="inputText">
-                    <label for="cat">Category</label>
-                    <input type="text" :value="detail.category"/>
-                </div>
+                <tbody>
+                  <tr v-for="item in cbsdinfo" :key="item.name">
+                    <td style="display: flex; justify-content: space-between; height: 40px; padding: 3px"><label style="font-weight: normal;">{{item.name}}:</label>{{item.value}}</td>
+                  </tr>
+                </tbody>
                 <thead class="thead-dark">
                   <tr>
                     <th>CBSD installationParam</th>
                   </tr>
                 </thead>
-                <div class="inputText">
-                    <label for="height">Height</label>
-                    <input type="text" :value="detail.height"/>
-                </div>
-                <div class="inputText">
-                    <label for="heighttype">HeightType</label>
-                    <input type="text" :value="detail.heightType"/>
-                </div>
-                <div class="inputText">
-                    <label for="ha">HorizontalAccuracy</label>
-                    <input type="text" :value="detail.horizontalAccuracy"/>
-                </div>
-                <div class="inputText">
-                    <label for="va">VerticalAccuracy</label>
-                    <input type="text" :value="detail.verticalAccuracy"/>
-                </div>
-                <div class="inputText">
-                    <label for="aa">AntennaAzimuth</label>
-                    <input type="text" :value="detail.antennaAzimuth"/>
-                </div>
-                <div class="inputText">
-                    <label for="ad">AntennaDowntilt</label>
-                    <input type="text" :value="detail.antennaDowntilt"/>
-                </div>
-                <div class="inputText">
-                    <label for="ag">AntennaGain</label>
-                    <input type="text" :value="detail.antennaGain"/>
-                </div>
-                <div class="inputText">
-                    <label for="ec">EirpCapability</label>
-                    <input type="text" :value="detail.eirpCapability"/>
-                </div>
-                <!--div class="inputText">
-                    <label for="ec">EirpCapability</label>
-                    <input type="text" id="ec" :value="detail."/>
-                </div-->
-                <div class="inputText">
-                    <label for="ab">AntennaBeamwidth</label>
-                    <input type="text" :value="detail.antennaBeamwidth"/>
-                </div>
-                <div class="inputText">
-                    <label for="am">AntennaModel</label>
-                    <input type="text" :value="detail.antennaModel"/>
-                </div>
+                <tbody>
+                  <tr v-for="item in cbsdinstall" :key="item.name">
+                    <td style="display: flex; justify-content: space-between; height: 40px; padding: 3px"><label style="font-weight: normal;">{{item.name}}:</label>{{item.value}}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <!--button type="button" class="btn btn-primary" @click="showdetail">Test</button-->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -153,11 +82,99 @@ Vue.component('detail-enbmodal',{
   </div>
   `,
   props: ['cbsd','detail'],
+  created() {
+    console.log('fuck you!');
+  },
+  // data() { return getDefaultData() },
   data() {
     return {
+      info: [
+        {name:'CBSD S/N', value: this.cbsd},
+        {name:'FCCID', value: this.detail.fccId},
+        {name:'userID', value: this.detail.userId}
+      ],
+      gps: [
+        {name:'Longitude', value: this.detail.lng},
+        {name:'Latitude', value: this.detail.lat}
+      ],
+      cpiinfo: [
+        {name:'CPI ID', value: this.detail.cpiId},
+        {name:'CPI Name', value: this.detail.cpiName},
+        {name:'InstallCert. Time', value: this.detail.installCertificateTime},
+        {name:'ProtectedHeader', value: this.detail.protectedHeader},
+        {name:'EncodedCpiSignData', value: this.detail.encodedCpiSignData},
+        {name:'DigitalSignature', value: this.detail.digitalSignature},
+        
+      ],
+      cbsdinfo: [
+        {name:'callSign', value: this.detail.callSign},
+        {name:'Category', value: this.detail.category},
+      ],
+      cbsdinstall: [
+        {name:'Height', value: this.detail.height},
+        {name:'HeightType', value: this.detail.heightType},
+        {name:'HorizontalAccuracy', value: this.detail.horizontalAccuracy},
+        {name:'VerticalAccuracy', value: this.detail.verticalAccuracy},
+        {name:'AntennaAzimuth', value: this.detail.antennaAzimuth},
+        {name:'AntennaDowntilt', value: this.detail.antennaDowntilt},
+        {name:'AntennaGain', value: this.detail.antennaGain},
+        {name:'EirpCapability', value: this.detail.eirpCapability},
+        {name:'AntennaBeamwidth', value: this.detail.antennaBeamwidth},
+        {name:'AntennaModel', value: this.detail.callSign}
+      ]
     }
   },
   methods: {
+    resetData () {
+      console.log('小夫，我要進來囉');
+      Object.assign(this.$data, this.getDefaultData());
+    },
+    getDefaultData() {
+      return {
+        info: [
+          {name:'CBSD S/N', value: this.cbsd},
+          {name:'FCCID', value: this.detail.fccId},
+          {name:'userID', value: this.detail.userId}
+        ],
+        gps: [
+          {name:'Longitude', value: this.detail.lng},
+          {name:'Latitude', value: this.detail.lat}
+        ],
+        cpiinfo: [
+          {name:'CPI ID', value: this.detail.cpiId},
+          {name:'CPI Name', value: this.detail.cpiName},
+          {name:'InstallCert. Time', value: this.detail.installCertificateTime},
+          {name:'ProtectedHeader', value: this.detail.protectedHeader},
+          {name:'EncodedCpiSignData', value: this.detail.encodedCpiSignData},
+          {name:'DigitalSignature', value: this.detail.digitalSignature},
+          
+        ],
+        cbsdinfo: [
+          {name:'callSign', value: this.detail.callSign},
+          {name:'Category', value: this.detail.category},
+        ],
+        cbsdinstall: [
+          {name:'Height', value: this.detail.height},
+          {name:'HeightType', value: this.detail.heightType},
+          {name:'HorizontalAccuracy', value: this.detail.horizontalAccuracy},
+          {name:'VerticalAccuracy', value: this.detail.verticalAccuracy},
+          {name:'AntennaAzimuth', value: this.detail.antennaAzimuth},
+          {name:'AntennaDowntilt', value: this.detail.antennaDowntilt},
+          {name:'AntennaGain', value: this.detail.antennaGain},
+          {name:'EirpCapability', value: this.detail.eirpCapability},
+          {name:'AntennaBeamwidth', value: this.detail.antennaBeamwidth},
+          {name:'AntennaModel', value: this.detail.callSign}
+        ]
+      }
+    },
+    showdetail() {
+      console.log(this.detail);
+      console.log(JSON.stringify(this.info));
+      console.log(JSON.stringify(this.gps));
+      // console.log(this.cpiinfo);
+      // console.log(this.cbsdinfo);
+      // console.log(this.cbsdinstall);
+    }
   },
   watch: {  
   },

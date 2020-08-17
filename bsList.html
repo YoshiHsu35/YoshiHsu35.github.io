@@ -42,13 +42,14 @@ body {
   margin-right: 0px;
 }
 
-label {
+label{
   font-family: 'Fredoka One', cursive;
 }
 
 input {
   float: right;
   clear: both;
+  width: 200px;
 }
 
 .table th {
@@ -136,9 +137,11 @@ input:checked + .slider:before {
     <a id="logout" href="index.html">logout</a>
   </nav>
   <div id="app" class="container-fluid container-custom-width my-3">
-  <edit-enbmodal :cbsd="tempDetailEnb.sn" :detail="tempDetailEnb.detail"></edit-enbmodal>
-  <new-enbmodal></new-enbmodal>
-  <detail-enbmodal :cbsd="tempDetailEnb.sn" :detail="tempDetailEnb.detail"></detail-enbmodal>
+  <!-- Modal Position -->
+  <edit-enbmodal v-if="editModal" :cbsd="tempDetailEnb.sn" :detail="tempDetailEnb.detail" ref="edit1"></edit-enbmodal>
+  <new-enbmodal @update="getEnbs()" ref="new1"></new-enbmodal>
+  <detail-enbmodal :cbsd="tempDetailEnb.sn" :detail.sync="tempDetailEnb.detail" ref="detail1"></detail-enbmodal>
+  <!-- Modal Position -->
     <div>
       <button class="btn btn-primary" @click="openModal('new')" data-toggle="modal" data-target=".bd-example-modal-lg">新增基站</button>
       <!-- <button class="btn btn-primary" @click="testapi" data-toggle="modal" data-target=".bd-example-modal-lg">只是測試</button> -->
@@ -160,14 +163,14 @@ input:checked + .slider:before {
             <th>{{earfcnToFreq(item.earfcndl, item.bandwidth)[0]}}/{{earfcnToFreq(item.earfcndl, item.bandwidth)[1]}}</th>
             <th>{{item.bandwidth}}</th>
             <th style="width: 100px;">{{item.category}}</th>
-            <th style="width: 100px;"><button class="btn btn-info" @click="openModal('detail')">Detail</button></th>
+            <th style="width: 100px;"><button class="btn btn-info" @click="openModal('detail',item.cbsdsn)">Detail</button></th>
             <th style="width: 100px;">
               <button class="btn btn-outline-info btn-sm" style="width:35px;height:35px;" @click="openModal('edit',item.cbsdsn)"><i class="fas fa-edit"></i></button>
               <button class="btn btn-outline-danger btn-sm" style="width:35px;height:35px;" @click="delEnb(item.cbsdsn)"><i class="fas fa-trash-alt"></i></button>
             </th>
             <th>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" v-model="item.cbrsenable" @change="enableCBRS(item.cbsdsn, item.cbrsenable)">
                 <span class="slider round"></span>
               </label>
             </th>
