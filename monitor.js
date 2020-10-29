@@ -97,7 +97,7 @@ new Vue({
       const center = this.calMapCenter();
       const gmap = new google.maps.Map(document.getElementById('gmap'), {
         center: { lat: center.lat, lng: center.lng},
-        zoom: 12,
+        zoom: 18,
         maxZoom: 20,
         minZoom: 3,
         streetViewControl: false,

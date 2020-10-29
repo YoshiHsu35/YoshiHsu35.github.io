@@ -25,11 +25,12 @@
   }
 
   body {
-    background-color: #fff7f8;
+    /* background-color: #fff7f8; */
+    background-color: #fff;
   }
 
   .navbar-custom { 
-    background-color: #c2f9ff; 
+    background-color: #60bfff; 
   } 
 
   h2 {
@@ -44,12 +45,16 @@
     top: 0px;
   }
 
+  .invalid {
+    color: red;
+  }
+
 </style>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <a class="navbar-brand" href="monitor.html">
       <img src="assets/horus-eye.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-      HORUS DP
+      DP OAM
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -70,21 +75,23 @@
       <div class="col mx-4">
         <h2>SAS</h2>
         <div class="form-group">
-          <label for="usr"><strong>SAS URL</strong></label><input type="text" class="form-control" id="usr">
+          <label for="usr"><strong>SAS URL</strong></label><input type="text" class="form-control" id="sasurl" v-model="sasip" v-if="cfg.sas !== undefined">
+          <!-- <label for="usr"><strong>SAS URL</strong></label><input type="text" class="form-control" id="sasurl"> -->
         </div>
         <div class="form-group">
-          <label for="usr"><strong>SAS port</strong></label><input type="text" class="form-control" id="usr">
+          <label for="usr"><strong>SAS port</strong></label><input type="text" class="form-control" id="sasport" v-model="sasport" disabled>
         </div>
         <h2>CPI</h2>
         <div class="form-group">
           <label style="display:block;" for="usr"><strong>support CPI signed</strong></label>
-          <input type="checkbox" checked data-toggle="toggle">
+          <input type="checkbox" data-toggle="toggle" v-model="cpi" v-if="cfg.sas !== undefined">
         </div>
         <div class="form-group">
           <label for="usr"><strong>CPI certificate key</strong></label>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01">
-            <label class="custom-file-label" for="inputGroupFile01"></label>
+            <input type="file" class="custom-file-input" id="inputGroupFile04" @change="cpiCertKeyUpload" accept=".key">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file: [cpicertprivkey.key]</label>
+            <div class="invalid" v-if="false">Already uploaded file</div>
           </div>
         </div>
       </div>
@@ -100,26 +107,30 @@
         <div class="form-group">
           <label for="usr"><strong>root CA</strong></label>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01">
-            <label class="custom-file-label" for="inputGroupFile01"></label>
+            <input type="file" class="custom-file-input" id="inputGroupFile01" @change="rootCaUpload" accept=".pem">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file: [server.pem]</label>
+            <div class="invalid" v-if="false">Example invalid custom file feedback</div>
           </div>
         </div>
         <div class="form-group">
           <label for="usr"><strong>DP private key</strong></label>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01">
-            <label class="custom-file-label" for="inputGroupFile01"></label>
+            <input type="file" class="custom-file-input" id="inputGroupFile02" @change="dpPrivateKeyUpload" accept=".key">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file: [client.key]</label>
+            <div class="invalid" v-if="false">Example invalid custom file feedback</div>
           </div>
         </div>
         <div class="form-group">
           <label for="usr"><strong>DP certificate</strong></label>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01">
-            <label class="custom-file-label" for="inputGroupFile01"></label>
+            <input type="file" class="custom-file-input" id="inputGroupFile03" @change="dpCertUpload" accept=".pem">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file: [client.pem]</label>
+            <div class="invalid" v-if="false">Example invalid custom file feedback</div>
           </div>
         </div>
       </div>
     </div>
+    <center><button class="btn btn-primary" @click="applyConfig">Apply</button></center>
   </div>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">

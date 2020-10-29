@@ -83,7 +83,7 @@ Vue.component('detail-enbmodal',{
   `,
   props: ['cbsd','detail'],
   created() {
-    console.log('fuck you!');
+    // console.log('fuck you!');
   },
   // data() { return getDefaultData() },
   data() {
@@ -126,7 +126,7 @@ Vue.component('detail-enbmodal',{
   },
   methods: {
     resetData () {
-      console.log('小夫，我要進來囉');
+      console.log('啊哈');
       Object.assign(this.$data, this.getDefaultData());
     },
     getDefaultData() {

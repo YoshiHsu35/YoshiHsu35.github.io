@@ -28,10 +28,10 @@ nav * {
 }
 
 body {
-  background-color: #fff7f8;
+  background-color: #fff;
 }
 .navbar-custom {
-  background-color: #c2f9ff;
+  background-color: #60bfff;
 }
 #gmap {
   width: 100%;
@@ -48,7 +48,7 @@ body {
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <a class="navbar-brand" href="dpSet.html">
       <img src="assets/horus-eye.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-      HORUS DP
+      DP OAM
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -65,7 +65,7 @@ body {
   </nav>
   <div id="app">
     <div class="row my-5 mx-3">
-      <div class="col-md-8">
+      <div class="col-md-10">
         <div class="card">
           <div class="card-header bg-info" style="padding: 1px; margin: 0px; font-family: 'Fredoka One', cursive;">
             google map
@@ -73,7 +73,6 @@ body {
           <div class="card-body" style="padding: 0px">
             <div id="gmap" class="gmap_scope"></div>
             <div id="legend">
-              <!-- <h4>Legend</h4> -->
               <div v-for="item in icons" :key="item.color" class="my-1">
                 <img :src="item.url" alt="" style="width: 15px; height: 23px;">{{item.title}}
               </div>
@@ -81,7 +80,7 @@ body {
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <div class="card">
           <div class="card-header bg-info" style="padding: 1px; margin: 0px; font-family: 'Fredoka One', cursive;">
             xxx-xxxxxxxxxx eNB Log
@@ -90,7 +89,7 @@ body {
             <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" style="height: 700px; box-shadow: none;"></textarea>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

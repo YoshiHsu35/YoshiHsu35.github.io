@@ -183,8 +183,10 @@ Vue.component('new-enbmodal',{
           </div>
         </div>
         <div class="modal-footer">
-          <label style="color: red">{{errormsg}}</label>
-          <button type="button" class="btn btn-primary" @click="creatEnb(cbsdsn)">AddEnb</button>
+          <!--button type="button" class="btn btn-info" @click="openExcel">匯入excel</button-->
+          <input type="file" id="inputExcel" @change="openExcel" accept=".xlsx" style="float:left;">
+          <!--label style="color: red">{{errormsg}}</label-->
+          <button type="button" class="btn btn-primary" @click="creatEnb(cbsdsn)">AddEnbs</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -193,8 +195,48 @@ Vue.component('new-enbmodal',{
   `,
   data() { return getDefaultData() },
   methods: {
+    openExcel (e) {
+      console.log('Open!');
+      const file = e.target.files[0]
+      /* Boilerplate to set up FileReader */
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        /* Parse data */
+        const bstr = e.target.result;
+        const wb = XLSX.read(bstr, { type: 'binary' });
+        /* Get first worksheet */
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        /* Convert array of arrays */
+        const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+        /* Update state */
+        // this.data = data;
+        this.param.fccId = data[0][1];
+        this.param.userId = data[1][1];
+        this.param.cpiId = data[2][1];
+        this.param.cpiName = data[3][1];
+        this.param.installCert = data[4][1];
+        this.param.protectedHeader = data[5][1];
+        this.param.encodedCpiSignData = data[6][1];
+        this.param.digitalSignature = data[7][1];
+        this.param.callSign = data[8][1];
+        this.param.category = data[9][1];
+        this.param.height = data[10][1];
+        this.param.heightType = data[11][1];
+        this.param.horizontalAccuracy = data[12][1];
+        this.param.verticalAccuracy = data[13][1];
+        this.param.antennaAzimuth = data[14][1];
+        this.param.antennaDowntilt = data[15][1];
+        this.param.antennaGain = data[16][1];
+        this.param.eirpCapability = data[17][1];
+        this.param.antennaBeamwidth = data[18][1];
+        this.param.antennaModel = data[19][1];
+        // const header = data.shift();
+      }
+      reader.readAsBinaryString(file);
+    },
     resetData () {
-      console.log('小夫，我要進來囉');
+      // console.log('小夫');
       Object.assign(this.$data, getDefaultData());
     },
     creatEnb (cbsd) {

@@ -10,6 +10,7 @@ new Vue({
       sn: '',
       detail: {}
     },
+    deleteEnb: '',
     isLoadIn: false,
     listhead: ['IP Address', 'CBSD S/N', 'status', 'RF status', 'TX/MaxEIRP', 'high/low(MHz)', 'Bandwidth(MHz)', 'Category', '詳細參數', 'Edit/Delete', '啟動CBRS'],
     enbs: [
@@ -98,16 +99,8 @@ new Vue({
       })
     },
     delEnb (cbsd) {
-      const api = 'http://10.101.129.48:5888/enb/delete';
-      const body = {
-        cbsdsn: cbsd
-      }
-      axios.post(api, body).then((res) => {
-        console.log(res);
-        this.getEnbs();
-      }).catch(e => {
-        console.log(e);
-      })
+      this.deleteEnb = cbsd;
+      $('#delProductModal').modal('show');
     },
     earfcnToFreq (earfcn, bandwidth) {
       let freq = 3400 + 0.1*( earfcn - 41590 );

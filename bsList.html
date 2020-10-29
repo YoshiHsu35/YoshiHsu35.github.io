@@ -26,10 +26,11 @@ nav * {
   top: 0px;
 }
 body {
-  background-color: #fff7f8;
+  background-color: #fff;
+  /* background-color: #fff7f8; */
 }
 .navbar-custom {
-  background-color: #c2f9ff;
+  background-color: #60bfff;
   /* background-color: #87f3ff; */
 }
 
@@ -76,7 +77,8 @@ input {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #fff;
+  /* background-color: #ccc; */
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -121,7 +123,7 @@ input:checked + .slider:before {
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <a class="navbar-brand" href="dpSet.html">
       <img src="assets/horus-eye.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-      HORUS DP
+      DP OAM
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -141,6 +143,7 @@ input:checked + .slider:before {
   <edit-enbmodal v-if="editModal" :cbsd="tempDetailEnb.sn" :detail="tempDetailEnb.detail" ref="edit1"></edit-enbmodal>
   <new-enbmodal @update="getEnbs()" ref="new1"></new-enbmodal>
   <detail-enbmodal :cbsd="tempDetailEnb.sn" :detail.sync="tempDetailEnb.detail" ref="detail1"></detail-enbmodal>
+  <delete-enbmodal @update="getEnbs()" ref="delete1" :cbsd="deleteEnb"></delete-enbmodal>
   <!-- Modal Position -->
     <div>
       <button class="btn btn-primary" @click="openModal('new')" data-toggle="modal" data-target=".bd-example-modal-lg">新增基站</button>
@@ -195,6 +198,8 @@ input:checked + .slider:before {
   <script src="/components/newEnbModal.js"></script>
   <script src="/components/detailEnbModal.js"></script>
   <script src="/components/editEnbModal.js"></script>
+  <script src="/components/deleteEnbModal.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
   <script src="./bsList.js"></script>
   <!-- <script src="./enbModal.js"></script> -->
 </body>
